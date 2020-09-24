@@ -39,10 +39,35 @@ const App = () => {
     setLoading(false);
   };
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!gameOver) {
+      //resposta do usuário
+      const answer = e.currentTarget.value;
+      //Checar a resposta correta
+      const correct = questions[number].correct_answer === answer;
+      //Adicionar pontos caso a respota for correta
+      if (correct) setScore(prev => +1);
+      //salvando as respostas no array para resposta do usuário
+      const AnswerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer,
+      };
+      setUserAnswers((prev) => [...prev, AnswerObject]);
+    }
     
   }
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    //ir para a próxima questão(se não foir a ultima ainda)
+    const nextQuestion = number + 1;
+
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    }
+  };
 
 
   return (
@@ -65,9 +90,11 @@ const App = () => {
         callback={checkAnswer}
         />
       )}
+      {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
       <button className="next" onClick={nextQuestion}>
-        Próxima Questão
+          Próxima Questão
       </button>
+        ) : null}
     </div>
   );
 }
