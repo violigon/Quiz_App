@@ -55,7 +55,7 @@ const App = () => {
       ) : null}
       {!gameOver ? <p className="score">Pontos:</p> : null}
       {loading && <p>Carregando questões... </p>}
-      {/* {!loading && !gameOver && (
+      {!loading && !gameOver && (
       <QuestionCard
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
@@ -64,7 +64,7 @@ const App = () => {
         userAnswer={userAnswers ? userAnswers[number] : undefined}
         callback={checkAnswer}
         />
-      )} */}
+      )}
       <button className="next" onClick={nextQuestion}>
         Próxima Questão
       </button>
