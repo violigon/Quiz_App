@@ -49,19 +49,22 @@ const App = () => {
     <div className='App'>
       <h1>REACT QUIZ</h1>
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <button className="start" onClick={startTrivia}>Começar
+        <button className="start" onClick={startTrivia}>
+          Começar
         </button>
       ) : null}
       {!gameOver ? <p className="score">Pontos:</p> : null}
-      <p>Carregando questões... </p>
-      {/* <QuestionCard
+      {loading && <p>Carregando questões... </p>}
+      {/* {!loading && !gameOver && (
+      <QuestionCard
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answers}
         userAnswer={userAnswers ? userAnswers[number] : undefined}
         callback={checkAnswer}
-      /> */}
+        />
+      )} */}
       <button className="next" onClick={nextQuestion}>
         Próxima Questão
       </button>
